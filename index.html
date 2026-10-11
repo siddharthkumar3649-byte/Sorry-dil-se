@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ek Baat Dil Se ❤️‍🩹</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff7da8;
+    --deep: #35152f;
+    --white: #fff7fb;
+}
+
+body {
+    min-height: 100vh;
+    background: #170f24;
+    color: var(--white);
+    font-family: Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    padding: 18px;
+}
+
+/* Animated background */
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 20% 20%, #68284f 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, #35215e 0%, transparent 50%),
+        #170f24;
+}
+
+.glow {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background: #fa5686;
+    filter: blur(100px);
+    opacity: .20;
+    animation: glowMove 7s ease-in-out infinite alternate;
+}
+
+.glow:nth-child(1) {
+    top: 5%;
+    left: -90px;
+}
+
+.glow:nth-child(2) {
+    bottom: 5%;
+    right: -100px;
+    background: #9570ff;
+    animation-delay: 2s;
+}
+
+@keyframes glowMove {
+    from { transform: translate(0, 0) scale(.8); }
+    to { transform: translate(40px, -30px) scale(1.3); }
+}
+
+/* Floating hearts */
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    color: #ff9abb;
+    opacity: 0;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.6);
+        opacity: 0;
+    }
+    15% { opacity: .45; }
+    85% { opacity: .35; }
+    100% {
+        transform: translateY(-115vh) rotate(35deg) scale(1.3);
+        opacity: 0;
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 430px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Top decoration */
+.top-heart {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 18px;
+    animation: heartbeat 1.8s infinite;
+    filter: drop-shadow(0 0 15px #ff5488);
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.16); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.10); }
+    60% { transform: scale(1); }
+}
+
+/* Pages */
+.page {
+    display: none;
+    position: relative;
+    padding: 30px 23px 24px;
+    min-height: 530px;
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,.11),
+        rgba(255,255,255,.035)
+    );
+    border: 1px solid rgba(255,255,255,.19);
+    border-radius: 26px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.10);
+    backdrop-filter: blur(18px);
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.page.active {
+    display: flex;
+    animation: pageEnter .65s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.96);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff9abb, transparent);
+    animation: shine 5s infinite;
+}
+
+@keyframes shine {
+    to { left: 150%; }
+}
+
+h1, h2 {
+    text-align: center;
+    color: #ffb2cc;
+    text-shadow: 0 0 20px rgba(255,100,160,.3);
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 23px;
+    line-height: 1.5;
+    margin-bottom: 23px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #d7bbd0;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.message {
+    color: #fff3f8;
+    font-size: 16px;
+    line-height: 1.95;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.decor {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+/* Progress */
+.progress-area {
+    margin-top: 25px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 3px;
+    border-radius: 5px;
+    background: rgba(255,255,255,.12);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b9e, #ffc1d8);
+    transition: width .5s ease;
+}
+
+.progress-text {
+    text-align: center;
+    color: #d7bbd0;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+button {
+    flex: 1;
+    padding: 14px 10px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ff699a, #d63f7c);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(230,60,125,.22);
+    transition: transform .2s, box-shadow .2s;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+button.back {
+    background: rgba(255,255,255,.09);
+    box-shadow: none;
+}
+
+button:disabled {
+    opacity: .3;
+}
+
+button.copy {
+    margin-top: 17px;
+    background: linear-gradient(135deg, #8f72ff, #bc63bd);
+}
+
+/* Final page animation */
+.final-heart {
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 20px;
+    animation: heartbeat 1.8s infinite;
+}
+
+.signature {
+    text-align: center;
+    color: #ffb2cc;
+    margin-top: 22px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+@media(max-height: 750px) {
+    body { align-items: flex-start; }
+    .page { min-height: 0; }
+    .container { margin: 10px 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="glow"></div>
+    <div class="glow"></div>
+</div>
+
+<div class="container">
+
+<div class="top-heart">♡</div>
+
+<!-- PAGE 1 -->
+<section class="page active">
+    <div class="decor">🥺💗</div>
+    <h1>Ek Baat Dil Se</h1>
+    <div class="subtitle">JO KABHI KEH NAHI PAAYA...</div>
+
+    <p class="message">Aapse kuch kehna hai.
+
+Pata nahi aap meri baat samajh paayengi ya nahi, lekin jo bhi kehna hai, dil se kehna chahta hoon.
+
+Kya mujhse itni badi galti ho gayi ki aapne mujhe apne se itna door kar diya?
+
+Kya meri galtiyon ki wajah se aapke dil mein mere liye itni narazgi aa gayi ki aapne mujhe unfollow karna hi sahi samjha?</p>
+
+    <div class="progress-area">
+        <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
+        <div class="progress-text">Page 1 of 5</div>
+    </div>
+
+    <div class="buttons">
+        <button disabled class="back">← Back</button>
+        <button onclick="nextPage()">Next →</button>
+    </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+    <div class="decor">💔</div>
+    <h2>Mujhe Apni Galti Ka Ehsaas Hai</h2>
+
+    <p class="message">Haan, main maanta hoon ki maine aapko bahut hurt kiya hai.
+
+Kai baar aapki baat nahi maani, aapki situation ko theek se nahi samjha aur shayad apni feelings mein main ye bhool gaya ki meri kuch baaton se aapko bhi pareshani hoti hogi.
+
+Lekin yakeen maaniye, mera irada kabhi aapko takleef dene ka nahi tha.
+
+Shayad main apni feelings mein itna kho gaya ki aapki pareshani samajh hi nahi paaya. Is baat ka mujhe sach mein afsos hai.</p>
+
+    <div class="progress-area">
+        <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+        <div class="progress-text">Page 2 of 5</div>
+    </div>
+
+    <div class="buttons">
+        <button class="back" onclick="prevPage()">← Back</button>
+        <button onclick="nextPage()">Next →</button>
+    </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+    <div class="decor">🥀</div>
+    <h2>Aapki Situation Bhi Samajhta Hoon</h2>
+
+    <p class="message">Aapki bhi apni situation thi, aapki bhi majbooriyan hongi, jinhe shayad main samay par samajh nahi paaya.
+
+Is baat ka mujhe afsos hai.
+
+Main apni galtiyon ko sahi nahi thahra raha. Bas chahta hoon ki aap ek baar mujhe bata dein ki aakhir mujhse aisi kya galti hui, jiski wajah se aapne mujhse door hone ka faisla kar liya.
+
+Main aapki baat sunna aur samajhna chahta hoon. Main behas nahi karunga, bas apni galti ko samajhne ki koshish karunga.</p>
+
+    <div class="progress-area">
+        <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+        <div class="progress-text">Page 3 of 5</div>
+    </div>
+
+    <div class="buttons">
+        <button class="back" onclick="prevPage()">← Back</button>
+        <button onclick="nextPage()">Next →</button>
+    </div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+    <div class="decor">❤️‍🩹</div>
+    <h2>Aap Aaj Bhi Maayne Rakhti Hain</h2>
+
+    <p class="message">Aap mere liye aaj bhi utni hi maayne rakhti hain.
+
+Main aapse naraz nahi hoon, na hi aapko galat thehra raha hoon.
+
+Bas aapka achanak is tarah door ho jaana mujhe samajh nahi aa raha.
+
+Agar meri kisi baat se aapko dukh pahuncha hai, toh main dil se maafi maangta hoon.
+
+Mera maksad aapko pareshaan karna nahi hai. Main sirf apni galti samajhna chahta hoon aur aapki situation ko behtar tareeke se samajhna chahta hoon.</p>
+
+    <div class="progress-area">
+        <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+        <div class="progress-text">Page 4 of 5</div>
+    </div>
+
+    <div class="buttons">
+        <button class="back" onclick="prevPage()">← Back</button>
+        <button onclick="nextPage()">Next →</button>
+    </div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page">
+    <div class="final-heart">❤️</div>
+    <h2>Bas Ek Baar Apni Baat Keh Dijiyega</h2>
+
+    <p class="message">Main aapse ye nahi kehta ki aap sab kuch pehle jaisa kar dein.
+
+Bas agar aapko theek lage, toh ek baar apni narazgi ki wajah bata dijiyega, taaki main apni galti samajh sakun.
+
+Main aapki baat sununga aur aapke faisle ki izzat karunga.
+
+Aapko jawab dene ke liye koi jaldi nahi hai. Main nahi chahta ki meri wajah se aapko aur pareshani ho.
+
+Bas itna chahta hoon ki aap meri baat ko galat na samjhein. Main dil se maafi maang raha hoon.
+
+Aap khush rahein aur apna khayal rakhein. 🙏🏻❤️‍🩹</p>
+
+    <div class="signature">Dil se maafi... ❤️‍🩹</div>
+
+    <button class="copy" onclick="copyMessage()">💌 Poora Message Copy Karein</button>
+
+    <div class="progress-area">
+        <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+        <div class="progress-text">Page 5 of 5 · The End</div>
+    </div>
+
+    <div class="buttons">
+        <button class="back" onclick="prevPage()">← Back</button>
+        <button onclick="restart()">↻ Phir Se Padhein</button>
+    </div>
+</section>
+
+</div>
+
+<script>
+let current = 0;
+const pages = document.querySelectorAll(".page");
+
+function showPage(index) {
+    if (index < 0 || index >= pages.length) return;
+
+    pages[current].classList.remove("active");
+    current = index;
+    pages[current].classList.remove("active");
+
+    // Re-trigger entry animation
+    void pages[current].offsetWidth;
+    pages[current].classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function nextPage() {
+    if (current < pages.length - 1) showPage(current + 1);
+}
+
+function prevPage() {
+    if (current > 0) showPage(current - 1);
+}
+
+function restart() {
+    showPage(0);
+}
+
+const fullMessage = `Kya mujhse itni badi galti ho gayi ki aapne mujhe apne se itna door kar diya? Kya meri galtiyon ki wajah se aapke dil mein mere liye itni narazgi aa gayi ki aapne mujhe unfollow karna hi sahi samjha?
+
+Haan, main maanta hoon ki maine aapko bahut hurt kiya hai. Kai baar aapki baat nahi maani, aapki situation ko theek se nahi samjha aur shayad apni feelings mein main ye bhool gaya ki meri kuch baaton se aapko bhi pareshani hoti hogi. Lekin yakeen maaniye, mera irada kabhi aapko takleef dene ka nahi tha.
+
+Aapki bhi apni situation thi, aapki bhi majbooriyan hongi, jinhe shayad main samay par samajh nahi paaya. Is baat ka mujhe afsos hai. Main apni galtiyon ko sahi nahi thahra raha, bas chahta hoon ki aap ek baar mujhe bata dein ki aakhir mujhse aisi kya galti hui jiski wajah se aapne mujhse door hone ka faisla kar liya.
+
+Aap mere liye aaj bhi utni hi maayne rakhti hain. Main aapse naraz nahi hoon, na hi aapko galat thehra raha hoon. Bas aapka achanak is tarah door ho jaana mujhe samajh nahi aa raha. Agar meri kisi baat se aapko dukh pahuncha hai, toh main dil se maafi maangta hoon.
+
+Main aapse ye nahi kehta ki aap sab kuch pehle jaisa kar dein. Bas agar aapko theek lage, toh ek baar apni narazgi ki wajah bata dijiyega, taaki main apni galti samajh sakun. Main aapki baat sununga aur aapke faisle ki izzat karunga.`;
+
+async function copyMessage() {
+    try {
+        await navigator.clipboard.writeText(fullMessage);
+        alert("Poora message copy ho gaya ❤️");
+    } catch (e) {
+        const area = document.createElement("textarea");
+        area.value = fullMessage;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+        alert("Message copy ho gaya ❤️");
+    }
+}
+
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.textContent = Math.random() > 0.5 ? "♡" : "♥";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 18) + "px";
+    heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 15000);
+}
+
+setInterval(createHeart, 850);
+</script>
+
+</body>
+</html>
